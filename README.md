@@ -1,38 +1,109 @@
-Installation: npm install mt-react-captcha
-Usage Example:
+<div align="center">
+
+# mt-react-captcha
+
+[![npm version](https://img.shields.io/npm/v/mt-react-captcha.svg)](https://www.npmjs.com/package/mt-react-captcha)
+[![npm downloads](https://img.shields.io/npm/dm/mt-react-captcha.svg)](https://www.npmjs.com/package/mt-react-captcha)
+[![license: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+Simple, customizable CAPTCHA component for React (TypeScript). Draws an obfuscated code on a `<canvas>` with noise lines and randomized character transforms.
+
+</div>
+
+## Features
+
+- Customizable length, character modes, fonts, colors, size
+- Noise lines and randomized rotation for better obfuscation
+- Customizable noise line quantity and opacity
+- Validation callback via `onValidate`
+
+## Installation
+
+```bash
+npm install mt-react-captcha
+# or
+yarn add mt-react-captcha
+# or
+pnpm add mt-react-captcha
+```
+
+Peer dependencies (ensure these exist in your app):
+
+```bash
+npm install react react-dom
+```
+
+## Quick start
+
+```tsx
+import React, { useState } from 'react';
 import { MTCaptcha } from 'mt-react-captcha';
 
-<MTCaptcha length={4} mode="normal" /* other props */ />
+export default function Example() {
+  const [userText, setUserText] = useState('');
+  const [isValid, setIsValid] = useState(false);
+
+  return (
+    <div style={{ display: 'grid', gap: 12 }}>
+      <MTCaptcha
+        length={5}
+        mode="normal"
+        userText={userText}
+        onValidate={setIsValid}
+      />
+      <input
+        value={userText}
+        onChange={(e) => setUserText(e.target.value)}
+        placeholder="Type the code"
+      />
+      <div>{isValid ? '✅ Verified' : '❌ Not matched'}</div>
+    </div>
+  );
+}
+```
 
 Default import is also supported:
+
+```tsx
 import MTCaptcha from 'mt-react-captcha';
+```
 
-Props:
+## Props
 
-length?: number   Optional, Specifies number of characters in the captcha, default value is 4
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `length` | `number` | `4` | Number of characters in the CAPTCHA. |
+| `mode` | `"normal" \| "uppersOnly" \| "lowersOnly" \| "numbersOnly" \| "noUpper" \| "noLower" \| "noNumber"` | `"normal"` | Character set used to generate the code. |
+| `regenerate` | `boolean` | `false` | When toggled to `true`, regenerates a new CAPTCHA. |
+| `fontWeight` | `number` | `400` | Font weight used when drawing the text. |
+| `fontSize` | `number` | `48` | Font size in pixels. |
+| `fontFamily` | `string` | `"Arial"` | Canvas font family. |
+| `textColor` | `CSSProperties["color"]` | `"#333"` | Text color. |
+| `background` | `CSSProperties["color"]` | `"#f0f0f0"` | Canvas background color. |
+| `noiseLines` | `number` | `20` | Count of random noise lines for obfuscation. |
+| `noiseLinesOpacity` | `CSSProperties["opacity"]` | `"0.8"` | Opacity of noise lines (0–1). |
+| `width` | `number` | `200` | Canvas width in CSS pixels. |
+| `height` | `number` | `50` | Canvas height in CSS pixels. |
+| `userText` | `string` | `""` | The user-entered text to validate against the CAPTCHA. |
+| `onValidate` | `(isValid: boolean) => void` | `undefined` | Callback fired whenever `userText` changes; `true` if it matches the CAPTCHA. |
 
-mode?: normal, uppersOnly, lowersOnly, numbersOnly, noUpper, noLower, noNumber    Optional, Specifies types of the characters to be used in the component, default value is normal which uses uppercase and lowercase letters and numbers
+## Regenerating the CAPTCHA
 
-regenerate?: boolean.   takes a boolean to regenerate the captcha when is true, default value is false
+Toggle `regenerate` to `true` to force a new code (you can flip a boolean state):
 
-fontWeight?: number    default value is 400
+```tsx
+const [regen, setRegen] = useState(false);
+// ...
+<MTCaptcha regenerate={regen} />
+<button onClick={() => setRegen((v) => !v)}>Regenerate</button>
+```
 
-fontSize?: number    default value is 48
+## Notes
 
-fontFamily?: string    default value is Arial
+- The component renders a `<canvas>`; it does not expose the raw value. Use `onValidate` or manage your own input for comparison.
+- Works in React 16.8+ (hooks). Types are included.
 
-textColor?: CSSProperties["color"]    default value is #333
+## License
 
-backgraoung?: CSSProperties["color"]    default value is #f0f0f0
-
-noiseLines?: number    Specifies number of noise lines to be added to the numbers for distortion, default value is 20
-
-noiseLinesOpacity?: string    Takes a string from 0 to 1 to specify opacity of noise lines drawn on the captcha, default value is 0.8
-
-width?: number    width of the component, default value is 200
-
-height?: number    height of the component, default value is 50
-
-userText?: string    binds to a string from outside to check user input
-
-onValidate?: (isValid: boolean) => void    takes a function and return isValid which shows if the userText is equal to the generated captcha or not, returned value can be used outside the function
+MIT © Kiaksar. See [LICENSE](LICENSE).
+Installation: npm install mt-react-captcha
