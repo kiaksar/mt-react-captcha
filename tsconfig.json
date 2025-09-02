@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "./dist",
+    "strict": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declarationMap": false, // Disable source maps for declarations to keep dist clean
+    "emitDeclarationOnly": false // Ensure TypeScript emits both JS and declarations (Webpack will handle JS)
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

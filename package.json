@@ -1,0 +1,48 @@
+{
+  "name": "mt-react-captcha",
+  "version": "1.0.1",
+  "description": "React typescript customizable captcha component",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && webpack --mode production",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiaksar/mt-react-captcha.git"
+  },
+  "homepage": "https://github.com/kiaksar/mt-react-captcha#readme",
+  "bugs": {
+    "url": "https://github.com/kiaksar/mt-react-captcha/issues"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "javascript",
+    "captcha"
+  ],
+  "author": "Kiaksar",
+  "license": "MIT",
+  "files": [
+    "dist/**",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "@types/react": ">=16.8.0",
+    "@types/react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.2",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1"
+  }
+}
