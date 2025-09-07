@@ -88,7 +88,7 @@ const MTCaptcha = ({
     if (onValidate) {
       onValidate(userText === captchaText);
     }
-  }, [userText]);
+  }, [userText, captchaText]);
 
   useEffect(() => {
     setCaptchaText(generateRandomString());
@@ -101,7 +101,6 @@ const MTCaptcha = ({
   }, [regenerate]);
 
   useEffect(() => {
-    console.log("captcha text", captchaText);
 
     const canvas = canvasRef.current;
     if (!canvas) return;
